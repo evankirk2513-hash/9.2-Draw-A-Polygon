@@ -22,18 +22,21 @@ def draw_board(turtle):
     turtle.goto(-250,-250)
     turtle.goto(-250,250)
 
-def forward(turtle):
+def forward(turtle,turtles):
     turtle.forward(5)
     if turtle.xcor() > 245 or turtle.xcor() < -245:
         turtle.speed(0)
         turtle.setheading(180 - turtle.heading())
         turtle.fd(10)
+        turtles.append(create_new_turtle())
         turtle.speed(5)
     if turtle.ycor() > 245 or turtle.ycor() < -245:
         turtle.speed(0)
         turtle.setheading(-turtle.heading())
         turtle.fd(10)
+        turtles.append(create_new_turtle())
         turtle.speed(5)
+    return turtles
 
 def move_xy(turtle,deltaX,deltaY):
     newX = turtle.xcor() + deltaX
@@ -47,9 +50,13 @@ def move_xy(turtle,deltaX,deltaY):
     turtle.goto(newX,newY)
     return deltaX,deltaY
 
-
-
-
+def create_new_turtle():
+    new_turtle = Turtle()
+    new_turtle.color(random_color())
+    new_turtle.speed(0)
+    new_turtle.shape("turtle")
+    new_turtle.setheading(random.randint(0,360))
+    return new_turtle
 
 draw_board(draw)
 
@@ -58,11 +65,11 @@ player.color(random_color())
 player.shape("turtle")
 player.setheading( random.randint(0,360) )
 
-deltaX = random.randint(-5,5)
-deltaY = random.randint(-5,5)
+turtles = [player]
 
 while True:
-    forward(player)
+    for turtle in turtles:
+        turtles = forward(turtle, turtles)
 
 
 
