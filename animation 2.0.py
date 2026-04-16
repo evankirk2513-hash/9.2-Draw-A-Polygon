@@ -58,31 +58,17 @@ def create_player():
     player.shapesize(2)
 
 # player movement
-def up():
-    global player
-    player.setheading(90)
-    player.sety(player.ycor()+5)
-
-def down():
-    global player
-    player.setheading(270)
-    player.sety(player.ycor()-5)
-
 def left():
     global player
-    player.setheading(180)
-    player.setx(player.xcor()-5)
+    player.left(10)
 
 def right():
     global player
-    player.setheading(360)
-    player.setx(player.xcor()+5)
+    player.right(10)
 
 # key binding
 screen.listen()
 screen.onkeypress(create_player,"space")
-screen.onkeypress(up,"Up")
-screen.onkeypress(down,"Down")
 screen.onkeypress(right,"Right")
 screen.onkeypress(left,"Left")
 
@@ -103,6 +89,11 @@ while True:
         if player != None and player.distance(turtle) < 20:
             turtle.hideturtle()
             turtles.remove(turtle)
+    if player != None:
+        forward(player,turtles)
+
+
+
 
 
 
