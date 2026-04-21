@@ -82,8 +82,9 @@ starter.setheading(random.randint(0,360))
 turtles = [starter]
 
 player = None
+won = False
 
-while True:
+while won == False:
     for turtle in turtles:
         turtles = forward(turtle, turtles)
         if player != None and player.distance(turtle) < 20:
@@ -91,6 +92,8 @@ while True:
             turtles.remove(turtle)
     if player != None:
         forward(player,turtles)
+    if len(turtles) == 0:
+        won = True
 
 
 
